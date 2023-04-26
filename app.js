@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -147,15 +148,17 @@ app.post("/signup",
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
+    bcrypt.hash(password,10,(error,results) => {
     connection.query(
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-      [name, email, password],
+      [name, email, hash],
       (error,results) => {
         req.session.userId = results.insertId;
         req.session.name = name;
         res.redirect("/");
       }
     );
+    });
   }
 );
 
@@ -169,12 +172,20 @@ app.post("/login", (req,res) => {
     "SELECT * FROM users WHERE email = ?",
     [email],
     (error,results) => {
-      if(req.body.password === results[0].password){
-        req.session.userId = results[0].id
-        req.session.name = results[0].name
-        res.redirect("/");
+      if(results.length > 0){
+        const plain = req.body.password;
+        const hash = results[0].password;
+        bcrypt.compare(plain, hash, (error,isEqual) => {
+          if(isEqual){
+            req.session.userId = results[0].id
+            req.session.name = results[0].name
+            res.redirect("/");
+          }else{
+            res.redirect("/login");
+          }
+        });    
       }else{
-        res.render("login.ejs");
+        res.redirect("/login");
       } 
     }
   );

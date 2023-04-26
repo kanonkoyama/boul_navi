@@ -25,11 +25,11 @@ app.use(
 app.use((req,res,next) => {
   if(req.session.userId === undefined){
     console.log("ログインしていません");
-    res.locals.username = "ゲスト"
+    res.locals.name = "ゲスト"
     res.locals.isLoggedIn = false;
   }else{
     console.log("ログインしています");
-    res.locals.username = req.session.username;
+    res.locals.name = req.session.name;
     res.locals.isLoggedIn = true;
   }
   next();
@@ -90,6 +90,75 @@ app.post("/delete", (req,res) => {
   );
 });
 
+app.get("/area", (req,res) => {
+  res.render("area.ejs");
+});
+
+app.get("/location",(req,res) => {
+  res.render("location.ejs");
+});
+
+app.get("/search", (req,res) => {
+  res.render("search.ejs");
+});
+
+app.get("/signup",(req,res) => {
+  res.render("signup.ejs", {errors: []});
+});
+
+app.post("/signup", 
+  (req,res,next) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const errors = [];
+    if(name === ""){
+      errors.push("名前を入力してください");
+    };
+    if(email === ""){
+      errors.push("メールアドレスを入力してください");
+    };
+    if(password === ""){
+      errors.push("パスワードを入力してください");
+    };
+    if(errors.length > 0){
+      res.render("signup.ejs", {errors: errors});
+    }else{
+      next();
+   }
+  },
+  (req,res,next) => {
+    const email = req.body.email;
+    const errors = [];
+    connection.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email],
+      (error,results) => {
+        if(results.length > 0){
+          errors.push("既に登録されているメールアドレスです");
+          res.render("signup.ejs",{errors: errors});
+        }else{
+          next();
+        }
+      }
+    );
+  },
+  (req,res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    connection.query(
+      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+      [name, email, password],
+      (error,results) => {
+        req.session.userId = results.insertId;
+        req.session.name = name;
+        res.redirect("/");
+      }
+    );
+  }
+);
+
 app.get("/login", (req,res) => {
   res.render("login.ejs");
 });
@@ -102,7 +171,7 @@ app.post("/login", (req,res) => {
     (error,results) => {
       if(req.body.password === results[0].password){
         req.session.userId = results[0].id
-        req.session.username = results[0].name
+        req.session.name = results[0].name
         res.redirect("/");
       }else{
         res.render("login.ejs");

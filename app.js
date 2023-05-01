@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
   password: '1227Kumakuma',
-  database: 'boul_navi'
+  database: 'boul_navi',
 });
 
 app.use(
@@ -40,9 +40,21 @@ app.get('/', (req, res) => {
   res.render("top.ejs");
 });
 
+app.post("/list",(req,res) => {
+  console.log(req.body.area);
+  const area_id = req.body.area;
+  connection.query(
+    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE area_id = ?",
+    [area_id],
+    (error,results) => {
+      res.render("list.ejs", {gims: results});
+    }
+  );
+});
+
 app.get("/list",(req,res) => {
   connection.query(
-    "SELECT * FROM gims",
+    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id",
     (error,results) => {
       res.render("list.ejs", {gims: results});
     }
@@ -52,10 +64,10 @@ app.get("/list",(req,res) => {
 app.get("/gim/:id",(req,res) => {
   const id = req.params.id;
   connection.query(
-    "SELECT * FROM gims WHERE id = ?",
-    [id],
+    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE id = ?;SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE id = ?",
+    [id,id],
     (error,results) => {
-      res.render("gim.ejs", {gim: results[0]});
+      res.render("gim.ejs", {gim: results[0],reviews: results[1]});
     }
   );
 });
@@ -66,27 +78,40 @@ app.get("/review/:id",(req,res) => {
     "SELECT * FROM gims WHERE id = ?",
     [id],
     (error,results) => {
-      res.render("review.ejs", {gim: results[0]});
+      res.render("review.ejs", {gim: results[0], errors: []});
     }
   );
 });
 
-app.post("/create",(req,res) => {
+app.post("/create/:id",(req,res,next) => {
+  if(req.body.content === ""){
+    errors.push("内容を入力してください");
+  };
+  if(errors.length > 0){
+    res.render("review.ejs", {errors: errors});  
+  }else{
+    next();
+  }
+},
+(req,res) => {  
+  const user_id = req.session.userId;
+  const gim_id = req.params.id;
+  const content = req.body.content;
   connection.query(
-    "INSERT INTO reviews (content) VALUES (?)",
-    [req.body.content],
+    "INSERT INTO reviews (user_id, gim_id, content) VALUES (?, ?, ?)",
+    [user_id, gim_id, content],
     (error,results) => {
       res.redirect("/gim/:id");
     }
   );
 });
 
-app.post("/delete", (req,res) => {
+app.post("/delete/:id", (req,res) => {
   connection.query(
     "DELETE FROM reviews WHERE id = ?",
     [req.params.id],
     (error,results) => {
-      res.redirect("list");
+      res.redirect("/list");
     }
   );
 });
@@ -163,7 +188,7 @@ app.post("/signup",
 );
 
 app.get("/login", (req,res) => {
-  res.render("login.ejs");
+  res.render("login.ejs", {errors: []});
 });
 
 app.post("/login", (req,res) => {
@@ -181,11 +206,13 @@ app.post("/login", (req,res) => {
             req.session.name = results[0].name
             res.redirect("/");
           }else{
-            res.redirect("/login");
+            errors.push("メールアドレス又はパスワードが間違っています");
+            res.render("login.ejs", {errors: errors});
           }
         });    
       }else{
-        res.redirect("/login");
+        errors.push("メールアドレス又はパスワードが間違っています");
+        res.render("login.ejs", {errors: errors});
       } 
     }
   );

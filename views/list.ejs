@@ -8,8 +8,20 @@
   </head>
   <body>
     <%- include('header'); %>
-    <main>
-    </main>
+    <div class="main_wrapper">
+      <div class="container">
+        <main>
+          <ul class="list">
+            <% gims.forEach((gim) => { %>
+            <li>
+            <%= gim.name %>
+            </li>  
+            <%= gim.address %>
+            <% }) %>
+          </ul>
+        </main>
+      </div>
+    </div>
     <footer>
     </footer>
   </body>

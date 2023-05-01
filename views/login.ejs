@@ -8,9 +8,28 @@
   </head>
   <body>
     <%- include('header'); %>
-    <main>
-    </main>
-    <footer>
-    </footer>
+    <div class="login">
+      <div class="container">
+        <div class="panel">
+          <h2>ログイン</h2>
+          <% if(errors.lenggth > 0){ %>
+            <ul class="errors">
+              <% errors.foreach(error => { %>
+              <li><%= error %></li>
+              <% }); %>
+            </ul>
+          <% } %>  
+          <form action="/login" method = "post">
+            <p>メールアドレス</p>
+            <input type="text" name = "email">
+            <p>パスワード</p>
+            <input type="password" name = "password">
+            <input type="submit" value = "ログインする">
+            <br>
+            <a href="/">戻る</a>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

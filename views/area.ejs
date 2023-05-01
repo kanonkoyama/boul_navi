@@ -3,13 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>boul_navi</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="/send_url.js"></script>
   </head>
   <body>
     <%- include('header'); %>
-    <main>
-    </main>
+    <div class="main_wrapper">
+      <div class="container">
+        <form method="post" action="/list">
+        <label for="area">エリアを選択してください</label>
+        <br>
+        <a href="/list">大阪府全域で探す</a>
+        <br>
+        <select name="area">
+          <option value="0">梅田・京橋・福島・本町</option>
+          <option value="1">心斎橋・難波・天王寺</option>
+          <option value="2">豊中・池田・高槻</option>
+          <option value="3">北河内・東大阪</option>
+          <option value="4">南河内</option>
+          <option value="5">堺・泉南</option>
+        </select>
+        <br>
+        <input type="submit" value = "このエリアで探す">
+        </form>
+      </div>
+    </div>
     <footer>
     </footer>
   </body>

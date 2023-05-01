@@ -8,8 +8,17 @@
   </head>
   <body>
     <%- include('header'); %>
-    <main>
-    </main>
+    <div class="main_wrapper">
+      <div class="container">
+        <% if(errors.lenggth > 0){ %>
+          <ul class="errors">
+            <% errors.foreach(error => { %>
+            <li><%= error %></li>
+            <% }); %>
+          </ul>
+        <% } %>  
+    </div>
+    </div>
     <footer>
     </footer>
   </body>

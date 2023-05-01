@@ -8,8 +8,59 @@
   </head>
   <body>
     <%- include('header'); %>
-    <main>
-    </main>
+    <div class="main_wrapper">
+      <div class="container">
+        <main>
+          <%= gim.name %>
+          <h2>こんなジム！</h2>
+          <%= gim.content %>
+          <h2>このジムの口コミ</h2>
+          <a href="/review/<%= gim.id %>">口コミを書く</a>
+          <ul>
+          <% reviews.forEach((review) => {
+            <li>
+              <%= review.name %>
+              <br>
+              <%= review.content %>
+            </li>  
+            );%>
+          </ul>  
+          <table>
+            <caption>このジムの詳細</caption>
+              <tbody>
+                <tr>
+                  <td>所在地</td>
+                  <td><%= gim.adress %></td>
+                </tr>
+                <tr>
+                  <td>電話番号</td>
+                  <td><%= gim%></td>
+                </tr>
+                <tr>
+                  <td>営業時間</td>
+                  <td><%= time %></td>
+                </tr>
+                <tr>
+                  <td>定休日</td>
+                  <td><%= regular_holiday %></td>
+                </tr>
+                <tr>
+                  <td>初回登録料</td>
+                  <td><%= initial_registration %></td>
+                </tr>
+                <tr>
+                  <td>利用料</td>
+                  <td><%= price %></td>
+                </tr>
+                <tr>
+                  <td>ホームページ</td>
+                  <td><%= website %></td>
+                </tr> 
+              </tbody>
+          </table>
+        </main>
+      </div>
+    </div>
     <footer>
     </footer>
   </body>

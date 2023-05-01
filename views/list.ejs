@@ -14,9 +14,9 @@
           <ul class="list">
             <% gims.forEach((gim) => { %>
             <li>
-            <%= gim.name %>
-            </li>  
-            <%= gim.address %>
+              <a href="/gim/<%= gim.id %>"><%= gim.name %></a>
+              <p><%= gim.address %></p>
+            </li>
             <% }) %>
           </ul>
         </main>

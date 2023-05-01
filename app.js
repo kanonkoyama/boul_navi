@@ -13,6 +13,7 @@ const connection = mysql.createConnection({
   user: 'root',
   password: '1227Kumakuma',
   database: 'boul_navi',
+  multipleStatements: true
 });
 
 app.use(
@@ -37,7 +38,7 @@ app.use((req,res,next) => {
 });
   
 app.get('/', (req, res) => {
-  res.render("top.ejs");
+  res.render("top.ejs", {errors: []});
 });
 
 app.post("/list",(req,res) => {
@@ -47,6 +48,7 @@ app.post("/list",(req,res) => {
     "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE area_id = ?",
     [area_id],
     (error,results) => {
+      console.log(error);
       res.render("list.ejs", {gims: results});
     }
   );
@@ -56,6 +58,7 @@ app.get("/list",(req,res) => {
   connection.query(
     "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id",
     (error,results) => {
+      console.log(error);
       res.render("list.ejs", {gims: results});
     }
   );
@@ -64,9 +67,11 @@ app.get("/list",(req,res) => {
 app.get("/gim/:id",(req,res) => {
   const id = req.params.id;
   connection.query(
-    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE id = ?;SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE id = ?",
+    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE gims.id = ?;SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.gim_id = ?",
     [id,id],
     (error,results) => {
+      console.log(error);
+      console.log(results);
       res.render("gim.ejs", {gim: results[0],reviews: results[1]});
     }
   );
@@ -78,12 +83,14 @@ app.get("/review/:id",(req,res) => {
     "SELECT * FROM gims WHERE id = ?",
     [id],
     (error,results) => {
+      console.log(error);
       res.render("review.ejs", {gim: results[0], errors: []});
     }
   );
 });
 
 app.post("/create/:id",(req,res,next) => {
+  const errors = [];
   if(req.body.content === ""){
     errors.push("内容を入力してください");
   };
@@ -101,7 +108,8 @@ app.post("/create/:id",(req,res,next) => {
     "INSERT INTO reviews (user_id, gim_id, content) VALUES (?, ?, ?)",
     [user_id, gim_id, content],
     (error,results) => {
-      res.redirect("/gim/:id");
+      console.log(error);
+      res.redirect("/");
     }
   );
 });
@@ -111,6 +119,7 @@ app.post("/delete/:id", (req,res) => {
     "DELETE FROM reviews WHERE id = ?",
     [req.params.id],
     (error,results) => {
+      console.log(error);
       res.redirect("/list");
     }
   );
@@ -126,6 +135,51 @@ app.get("/location",(req,res) => {
 
 app.get("/search", (req,res) => {
   res.render("search.ejs");
+});
+
+app.get("/contact", (req,res) => {
+  res.render("contact.ejs", {errors: []});
+});
+
+app.post("/contact/create", 
+  (req,res,next) => {
+    const errors = [];
+    if(req.body.content === ""){
+      errors.push("内容を入力してください");
+    };
+    if(errors.length > 0){
+      res.render("contact.ejs", {errors: errors});  
+    }else{
+      next();
+    }
+  },
+  (req,res) => {
+    const content = req.body.content;
+    const user_id = req.session.userId;
+    connection.query(
+      "INSERT INTO contacts (content, user_id) VALUES (?,?)",
+      [content, user_id],
+      (error,results) => {
+        console.log(error);
+        res.redirect("/");
+      }
+    );
+});
+
+app.get("/contact/index",(req,res) => {
+  if(req.session.userId !== 1){
+    const errors = [];
+    errors.push("権限がありません");
+    res.render("top.ejs", {errors: errors});
+  }else{
+  connection.query(
+    "SELECT * FROM contacts JOIN users ON contacts.user_id = users.id",
+    (error,results) => {
+      console.log(error);
+      res.render("contact.index.ejs",{contacts: results});
+    }
+  );
+  }
 });
 
 app.get("/signup",(req,res) => {
@@ -160,6 +214,7 @@ app.post("/signup",
       "SELECT * FROM users WHERE email = ?",
       [email],
       (error,results) => {
+        console.log(error);
         if(results.length > 0){
           errors.push("既に登録されているメールアドレスです");
           res.render("signup.ejs",{errors: errors});
@@ -173,7 +228,7 @@ app.post("/signup",
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    bcrypt.hash(password,10,(error,results) => {
+    bcrypt.hash(password,10,(error,hash) => {
     connection.query(
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hash],
@@ -193,10 +248,12 @@ app.get("/login", (req,res) => {
 
 app.post("/login", (req,res) => {
   const email = req.body.email;
+  const errors = [];
   connection.query(
     "SELECT * FROM users WHERE email = ?",
     [email],
     (error,results) => {
+      console.log(error);
       if(results.length > 0){
         const plain = req.body.password;
         const hash = results[0].password;

@@ -10,6 +10,18 @@
     <%- include('header'); %>
     <div class="main_wrapper">
       <div class="container">
+        <!--
+app.get("/gim/:id",(req,res) => {
+  const id = req.params.id;
+  connection.query(
+    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE id = ?;SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE id = ?",
+    [id,id],
+    (error,results) => {
+      res.render("gim.ejs", {gim: results[0],reviews: results[1]});
+    }
+  );
+});
+        -->
       </div>
     </div>
     <footer>

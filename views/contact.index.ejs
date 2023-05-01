@@ -10,16 +10,14 @@
     <%- include('header'); %>
     <div class="main_wrapper">
       <div class="container">
-        <% if(errors.length > 0){ %>
-          <ul class="errors">
-            <% errors.forEach(error => { %>
-            <li><%= error %></li>
-            <% }); %>
-          </ul>
-        <% } %>  
-        <h1>ボルダリングジムに行こう！</h1>
-        <br>
-        <h2></h2>
+        <ul class="contact">
+        <% contacts.forEach((contact) => { %>
+          <li>
+            <p><a href=""><%= contact.name %></a></p>
+            <p><%= contact.content %></p>
+          </li>  
+        <% })%>
+        </ul>
       </div>
     </div>
     <footer>

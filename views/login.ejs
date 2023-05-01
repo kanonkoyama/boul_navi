@@ -12,9 +12,9 @@
       <div class="container">
         <div class="panel">
           <h2>ログイン</h2>
-          <% if(errors.lenggth > 0){ %>
+          <% if(errors.length > 0){ %>
             <ul class="errors">
-              <% errors.foreach(error => { %>
+              <% errors.forEach(error => { %>
               <li><%= error %></li>
               <% }); %>
             </ul>

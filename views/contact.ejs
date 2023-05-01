@@ -10,7 +10,7 @@
     <%- include('header'); %>
     <div class="main_wrapper">
       <div class="container">
-        <form action="/create/<%= gim.id %>" method="post">
+        <form action="/contact/create" method="post">
           <% if(errors.length > 0){ %>
             <ul class="errors">
               <% errors.forEach(error => { %>
@@ -18,10 +18,10 @@
               <% }); %>
             </ul>
           <% } %>  
-          <p>口コミを投稿する</p>
+          <p>ご意見・ご要望をお聞かせください</p>
           <textarea name="content" maxlength="500" style="width:70%; height:100px"></textarea>
           <br>
-          <input type="submit" value="投稿する">
+          <input type="submit" value="送信する">
         </form>
       </div>
     </div>

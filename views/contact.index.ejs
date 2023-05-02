@@ -14,7 +14,7 @@
         <% contacts.forEach((contact) => { %>
           <li>
             <p><a href=""><%= contact.name %></a></p>
-            <p><%= contact.content %></p>
+            <p><%= nl2br(contact.content) %></p>
           </li>  
         <% })%>
         </ul>

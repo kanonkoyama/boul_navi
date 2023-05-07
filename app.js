@@ -16,6 +16,14 @@ const connection = mysql.createConnection({
   multipleStatements: true
 });
 
+var nl2br = function (str) {
+  if(str){
+  str = str.replace(/\r\n/g, '<br>');
+  str = str.replace(/(\n|\r)/g, '<br>');
+  }
+  return str;
+};
+
 app.use(
   session({
     secret: 'my_secret_key',
@@ -46,21 +54,28 @@ app.post("/list",(req,res) => {
   console.log(req.body.area);
   const area_id = req.body.area;
   connection.query(
-    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE area_id = ?",
+    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id WHERE area_id = ?",
     [area_id],
     (error,results) => {
       console.log(error);
-      res.render("list.ejs", {gims: results});
-    }
+      console.log(results);
+      const errors = []
+      if(results.length > 0){
+        res.render("list.ejs", {gims: results, errors: [] });
+      }else{
+        errors.push("ご希望のエリアでは見つかりませんでした")
+        res.render("list.ejs", {gims: results, errors: errors});
+      }}
   );
 });
 
 app.get("/list",(req,res) => {
   connection.query(
-    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id",
+    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id",
     (error,results) => {
+      const errors = []
       console.log(error);
-      res.render("list.ejs", {gims: results});
+      res.render("list.ejs", {gims: results, errors: []});
     }
   );
 });
@@ -68,12 +83,36 @@ app.get("/list",(req,res) => {
 app.get("/gim/:id",(req,res) => {
   const id = req.params.id;
   connection.query(
-    "SELECT * FROM gims JOIN informations ON gims.id = informations.gim_id WHERE gims.id = ?;SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.gim_id = ?",
+    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id WHERE gims.id = ?;SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.gim_id = ?",
     [id,id],
     (error,results) => {
       console.log(error);
       console.log(results);
-      res.render("gim.ejs", {gim: results[0],reviews: results[1]});
+      var gim_informations = results[0].map((result) => {
+        var gim = {
+          "id": result.id,
+          "name": result.name,
+          "content": nl2br(result.content),
+          "tell": result.tell,
+          "time": nl2br(result.time),
+          "regular_holiday": nl2br(result.regular_holiday),
+          "initial_registration": result.initial_registration,
+          "price": nl2br(result.price),
+          "website": result.website,
+          "address": nl2br(result.address)
+        };
+        return gim;
+      });
+      var reviews = results[1].map((result) => {
+        var review = {
+          "user-id": result.user_id,
+          "content": nl2br(result.content),
+          "name": result.name
+        }
+        console.log(review);
+        return review;
+      });
+      res.render("gim.ejs", {gim_informations: gim_informations[0],reviews: reviews});
     }
   );
 });
@@ -173,14 +212,54 @@ app.get("/contact/index",(req,res) => {
     errors.push("権限がありません");
     res.render("top.ejs", {errors: errors});
   }else{
+    connection.query(
+    "SELECT * FROM contacts LEFT JOIN users ON contacts.user_id = users.id",
+    (error,results) => {
+      var user_contacts = results.map((result) => {
+        var contacts = {
+          "user_name": result.name,
+          "content": nl2br(result.content) 
+        };
+        console.log(contacts);
+        return contacts
+      });
+      console.log(user_contacts);
+      user_contacts.forEach((contact) => {
+        console.log(contact);
+        console.log(contact.user_name);
+        console.log(contact.content);
+      });
+      console.log(error);
+      res.render("contact.index.ejs", {user_contacts: user_contacts});
+    });   
+    }
+  });
+
+app.get("/test",(req,res) => {
+  var test = `test1\r\ntest2`;
+  test = nl2br(test);
+  console.log(test);
   connection.query(
     "SELECT * FROM contacts JOIN users ON contacts.user_id = users.id",
     (error,results) => {
+      var user_contacts = results.map((result) => {
+        var contacts = {
+          "user_name": result.name,
+          "content": nl2br(result.content) 
+        };
+        console.log(contacts);
+        return contacts
+      });
+      console.log(user_contacts);
+      user_contacts.forEach((contact) => {
+        console.log(contact);
+        console.log(contact.user_name);
+        console.log(contact.content);
+      });
       console.log(error);
-      res.render("contact.index.ejs",{contacts: results});
+      res.render("test.ejs", {user_contacts: user_contacts});
     }
-  );
-  }
+    );
 });
 
 app.get("/signup",(req,res) => {

@@ -11,13 +11,12 @@
     <div class="main_wrapper">
       <div class="container">
         <ul class="contact">
-        <% contacts.forEach((contact) => { %>
-          <li>
-            <p><a href=""><%= contact.name %></a></p>
-            <p><%= nl2br(contact.content) %></p>
-          </li>  
-        <% })%>
-        </ul>
+          <% user_contacts.forEach((contact) => { %>
+            <li><%=contact%></li>
+            <li><%= contact.user_name %></li>
+            <li><%- contact.content %></li>
+          <% }); %>
+            </ul>
       </div>
     </div>
     <footer>

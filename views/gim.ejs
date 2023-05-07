@@ -11,53 +11,50 @@
     <div class="main_wrapper">
       <div class="container">
         <main>
-          <h2><%= gim.name %></h2>
+          <h2><%= gim_informations.name%></h2>
           <h2>こんなジム！</h2>
-          <%= gim.content %>
+          <%= gim_informations.content %>
           <h2>このジムの口コミ</h2>
-          <a href="/review/<%= gim[0]["id"] %>">口コミを書く</a>
+          <a href="/review/<%= gim_informations.id %>">口コミを書く</a>
           <ul>
           <% reviews.forEach((review) => { %>
             <li>
               <%= review.name %>
-              <%= console.log(review.name) %>
               <br>
-              <%= review.content %>
+              <%- review.content %>
             </li>  
             <% }); %>
           </ul>  
-          <%= console.log(gim.name)%>
           <table>
             <caption>このジムの詳細</caption>
               <tbody>
                 <tr>
                   <td>所在地</td>
-                  <td><%= gim[0]["address"] %></td>
-                  <% console.log("hello") %>
+                  <td><%- gim_informations.address %></td>
                 </tr>
                 <tr>
                   <td>電話番号</td>
-                  <td><%= gim[0]["tell"] %></td>
+                  <td><%= gim_informations.tell %></td>
                 </tr>
                 <tr>
                   <td>営業時間</td>
-                  <td><%= gim[0]["time"] %></td>
+                  <td><%- gim_informations.time %></td>
                 </tr>
                 <tr>
                   <td>定休日</td>
-                  <td><%= gim[0]["regular_holiday"] %></td>
+                  <td><%- gim_informations.regular_holiday %></td>
                 </tr>
                 <tr>
                   <td>初回登録料</td>
-                  <td><%= gim[0]["initial_registration"] %></td>
+                  <td><%- gim_informations.initial_registration %></td>
                 </tr>
                 <tr>
                   <td>利用料</td>
-                  <td><%= gim[0]["price"] %></td>
+                  <td><%- gim_informations.price %></td>
                 </tr>
                 <tr>
                   <td>ホームページ</td>
-                  <td><%= gim[0]["website"] %></td>
+                  <td><a href="<%= gim_informations.website %>" target="_blank" rel="nofollow"><%= gim_informations.website %></a></td>
                 </tr> 
               </tbody>
           </table>

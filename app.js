@@ -3,6 +3,8 @@ const mysql = require('mysql');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 
+
+
 const app = express();
 
 app.use(express.static('public'));
@@ -87,7 +89,13 @@ app.get("/gim/:id",(req,res) => {
     [id,id],
     (error,results) => {
       console.log(error);
-      console.log(results);
+      var gim_latlng = results[0].map((result) => {
+        var latlng = {
+          "lat": result.lat,
+          "lng": result.lng
+        };
+        return latlng;
+      });
       var gim_informations = results[0].map((result) => {
         var gim = {
           "id": result.id,
@@ -99,7 +107,7 @@ app.get("/gim/:id",(req,res) => {
           "initial_registration": result.initial_registration,
           "price": nl2br(result.price),
           "website": result.website,
-          "address": nl2br(result.address)
+          "address": nl2br(result.address),
         };
         return gim;
       });
@@ -109,10 +117,9 @@ app.get("/gim/:id",(req,res) => {
           "content": nl2br(result.content),
           "name": result.name
         }
-        console.log(review);
         return review;
       });
-      res.render("gim.ejs", {gim_informations: gim_informations[0],reviews: reviews});
+      res.render("gim.ejs", {gim_latlng: gim_latlng[0],gim_informations: gim_informations[0],reviews: reviews});
     }
   );
 });
@@ -170,7 +177,13 @@ app.get("/area", (req,res) => {
 });
 
 app.get("/location",(req,res) => {
-  res.render("location.ejs");
+  connection.query(
+    "SELECT gims.id,lat_id,lng_id,name,address,lat,lng FROM gims LEFT JOIN informations ON gims.id = informations.gim_id",
+    (error,results) => {
+      console.log(error);
+      res.render("location.ejs",{gim_latlng: results});
+    },
+  );
 });
 
 app.get("/search", (req,res) => {
@@ -221,7 +234,7 @@ app.get("/contact/index",(req,res) => {
           "content": nl2br(result.content) 
         };
         console.log(contacts);
-        return contacts
+        return contacts;
       });
       console.log(user_contacts);
       user_contacts.forEach((contact) => {
@@ -236,32 +249,22 @@ app.get("/contact/index",(req,res) => {
   });
 
 app.get("/test",(req,res) => {
-  var test = `test1\r\ntest2`;
-  test = nl2br(test);
-  console.log(test);
-  connection.query(
-    "SELECT * FROM contacts JOIN users ON contacts.user_id = users.id",
-    (error,results) => {
-      var user_contacts = results.map((result) => {
-        var contacts = {
-          "user_name": result.name,
-          "content": nl2br(result.content) 
-        };
-        console.log(contacts);
-        return contacts
-      });
-      console.log(user_contacts);
-      user_contacts.forEach((contact) => {
-        console.log(contact);
-        console.log(contact.user_name);
-        console.log(contact.content);
-      });
-      console.log(error);
-      res.render("test.ejs", {user_contacts: user_contacts});
-    }
-    );
+ res.render("test.ejs");
 });
 
+app.get("/test2",(req,res) => {
+  res.render("test2.ejs");
+ });
+
+ app.get("/test3",(req,res) => {
+  res.render("test3.ejs");
+ });
+
+ app.get("/test4",(req,res) => {
+  
+  res.render("test4.ejs");
+ });
+ 
 app.get("/signup",(req,res) => {
   res.render("signup.ejs", {errors: []});
 });

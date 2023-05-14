@@ -11,21 +11,25 @@
   <body>
     <div id="mapid"></div>
     <script>
-      var map = L.map('mapid').setView([34.702298, 135.495349], 13);
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
-      }).addTo(map);
+      var mymap = L.map('mapid');
+ 
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   maxZoom: 18,
+   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
+   }).addTo(mymap);
 
-      var marker2 = L.marker([35.7121, 139.8207]).addTo(map);
-      var popup = L.popup();
-      function onMarker2Click(e) {
-        popup
-          .setLatLng(e.latlng)
-          .setContent("<p>popup2</p><p>clickで表示されます。</p>")
-          .openOn(map);
-      }
-      map.on('click', onMarker2Click);
+ function onLocationFound(e) {
+     L.marker(e.latlng).addTo(mymap).bindPopup("現在地").openPopup();
+ }
+
+ function onLocationError(e) {
+     alert("現在地を取得できませんでした。" + e.message);
+ }
+
+ mymap.on('locationfound', onLocationFound);
+ mymap.on('locationerror', onLocationError);
+
+ mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
 
     </script>
 </body>

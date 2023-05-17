@@ -22,6 +22,8 @@
             <% gims.forEach((gim) => { %>
             <li>
               <a href="/gim/<%= gim.id %>"><%= gim.name %></a>
+              <img src="/images/sub_gim.<%= gim.id %>.jpg">
+              <p>出典：<%= gim.website %></p>
               <p><%= gim.address %></p>
             </li>
             <% }) %>

@@ -152,7 +152,7 @@ app.post("/create/:id",(req,res,next) => {
   const gim_id = req.params.id;
   const content = req.body.content;
   connection.query(
-    "INSERT INTO reviews (user_id, gim_id, content) VALUES (?, ?, ?)",
+    "INSERT INTO reviews (user_id, gim_id, content,create_day) VALUES (?, ?, ?, CURDATE())",
     [user_id, gim_id, content],
     (error,results) => {
       console.log(error);

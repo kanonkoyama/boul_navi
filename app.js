@@ -15,7 +15,8 @@ const connection = mysql.createConnection({
   user: 'root',
   password: '1227Kumakuma',
   database: 'boul_navi',
-  multipleStatements: true
+  multipleStatements: true,
+  dateStrings: 'date'
 });
 
 var nl2br = function (str) {
@@ -115,7 +116,8 @@ app.get("/gim/:id",(req,res) => {
         var review = {
           "user-id": result.user_id,
           "content": nl2br(result.content),
-          "name": result.name
+          "name": result.name,
+          "create_day": result.create_day
         }
         return review;
       });
@@ -124,7 +126,19 @@ app.get("/gim/:id",(req,res) => {
   );
 });
 
-app.get("/review/:id",(req,res) => {
+app.get("/review/:id",(req,res,next) => {
+  const errors = [];
+  const id = req.params.id;
+  if(res.locals.isLoggedIn === false){
+    errors.push("ログインしてください")
+  };
+  if(errors.length > 0){
+    res.render("login.ejs",{errors: errors})
+  }else{
+    next();
+  }
+},
+(req,res) => {  
   const id = req.params.id;
   connection.query(
     "SELECT * FROM gims WHERE id = ?",
@@ -249,21 +263,21 @@ app.get("/contact/index",(req,res) => {
   });
 
 app.get("/test",(req,res) => {
- res.render("test.ejs");
+  connection.query(
+    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id",
+    (error,results) => {
+      const errors = []
+      console.log(error);
+      res.render("list.ejs", {gims: results, errors: []});
+    }
+  );
 });
+
 
 app.get("/test2",(req,res) => {
   res.render("test2.ejs");
  });
 
- app.get("/test3",(req,res) => {
-  res.render("test3.ejs");
- });
-
- app.get("/test4",(req,res) => {
-  
-  res.render("test4.ejs");
- });
  
 app.get("/signup",(req,res) => {
   res.render("signup.ejs", {errors: []});

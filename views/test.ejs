@@ -9,23 +9,31 @@
     <script src="/send_url.js"></script>
   </head>
   <body>
-    <div id="mapid"></div>
-    <script>
-      var map = L.map('mapid').setView([34.702298, 135.495349], 13);
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
-      }).addTo(map);
+    <div class="main_wrapper">
+      <div class="container">
+        <main>
+          <% if(errors.length > 0){ %>
+            <ul class="errors">
+              <% errors.forEach(error => { %>
+              <li><%= error %></li>
+              <% }); %>
+            </ul>
+          <% } %>  
+            <ul class="list">
+            <% gims.forEach((gim) => { %>
+            <li>
+              <a href="/gim/<%= gim.id %>"><%= gim.name %></a>
+              <img src="/images/sub_gim.<%= gim.id %>.jpg">
+              <p>出典：<%= gim.website %></p>
+              <p><%= gim.address %></p>
+            </li>
+            <% }) %>
+          </ul>
+        </main>
+      </div>
+    </div>
+    <footer>
+    </footer>
 
-      var marker2 = L.marker([35.7121, 139.8207]).addTo(map);
-      var popup = L.popup();
-      function onMarker2Click(e) {
-        popup
-          .setLatLng(e.latlng)
-          .setContent("<p>popup2</p><p>clickで表示されます。</p>")
-          .openOn(map);
-      }
-      map.on('click', onMarker2Click);
-
-    </script>
-</body>
+  </body>
+</html>  

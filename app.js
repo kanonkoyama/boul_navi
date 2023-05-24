@@ -50,7 +50,14 @@ app.use((req,res,next) => {
 });
   
 app.get('/', (req, res) => {
-  res.render("top.ejs", {errors: []});
+  connection.query(
+    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id",
+    (error,results) => {
+      const errors = []
+      console.log(error);
+      res.render("top.ejs", {gims: results, errors: []});
+    }
+  );
 });
 
 app.post("/list",(req,res) => {

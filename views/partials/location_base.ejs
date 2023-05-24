@@ -1,8 +1,8 @@
-    <div id="mapid"></div>
+    <div id="map"></div>
     <script>
       var lat = document.getElementById( 'gimlocationlat' ).title;
       var lng = document.getElementById( 'gimlocationlng' ).title;      
-      var map = L.map('mapid').setView([lat,lng], 13);
+      var map = L.map('map').setView([lat,lng], 13);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '

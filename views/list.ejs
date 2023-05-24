@@ -5,33 +5,37 @@
     <title>boul_navi</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/send_url.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
   </head>
   <body>
     <%- include('partials/header'); %>
-    <div class="main_wrapper">
-      <div class="container">
-        <main>
+    <div class="list">
+      <div class="main_wrapper">
+        <div class="container">
+          <main>
           <% if(errors.length > 0){ %>
             <ul class="errors">
               <% errors.forEach(error => { %>
               <li><%= error %></li>
               <% }); %>
             </ul>
-          <% } %>  
-            <ul class="list">
+          <% } %>
+            <ul class="lists">
             <% gims.forEach((gim) => { %>
-            <li>
-              <a href="/gim/<%= gim.id %>"><%= gim.name %></a>
-              <img src="/images/sub_gim.<%= gim.id %>.jpg">
-              <p>出典：<%= gim.website %></p>
-              <p><%= gim.address %></p>
-            </li>
+              <li class="lists_item">
+                <a href="/gim/<%= gim.id %>"><%= gim.name %></a>
+                <br>
+                <img src="/images/sub_gim.<%= gim.id %>.jpg">
+                <p class="source">出典：<%= gim.website %></p>
+                <p><%= gim.address %></p>
+              </li>
             <% }) %>
-          </ul>
-        </main>
+            </ul>
+          </main>
+        </div>
       </div>
+      <footer>
+      </footer>
     </div>
-    <footer>
-    </footer>
   </body>
 </html>

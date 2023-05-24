@@ -5,24 +5,39 @@
     <title>boul_navi</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/send_url.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
   </head>
   <body>
     <%- include('partials/header'); %>
-    <div class="main_wrapper">
-      <div class="container">
-        <% if(errors.length > 0){ %>
-          <ul class="errors">
-            <% errors.forEach(error => { %>
-            <li><%= error %></li>
-            <% }); %>
-          </ul>
-        <% } %>  
-        <h1>ボルダリングジムに行こう！</h1>
-        <br>
-        <h2></h2>
+    <div class="top">
+      <div class="main_wrapper">
+        <div class="container">
+          <% if(errors.length > 0){ %>
+            <ul class="errors">
+             <% errors.forEach(error => { %>
+              <li><%= error %></li>
+             <% }); %>
+            </ul>
+          <% } %>  
+          <h1>ボルダリングジムに行こう！</h1>
+          <p class="index">大阪府のボルダリングジム一覧↓↓</p>
+          <ul class="top_lists">
+            <% gims.forEach((gim) => { %>
+              <li class="lists_item">
+                <a href="/gim/<%= gim.id %>"><%= gim.name %></a>
+                <br>
+                <img src="/images/sub_gim.<%= gim.id %>.jpg">
+                <p class="source">出典：<%= gim.website %></p>
+                <p><%= gim.address %></p>
+              </li>
+            <% }) %>
+            </ul>
+          <br>
+          <h2></h2>
+        </div>
       </div>
+      <footer>
+      </footer>
     </div>
-    <footer>
-    </footer>
   </body>
 </html>

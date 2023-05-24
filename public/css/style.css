@@ -1,8 +1,428 @@
-#mapid { height: 400px; width: 600px}
-
-h1{
-    color:aqua;
+* :not(.leaflet-pulsing-icon:after){
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
 }
-p{
-    color:black
+
+html,body{
+    width: 100%;
+    min-height: 1vh;
+}
+
+p,h2,h3,li,a,select,input,table{
+    color:#444444;
+}
+
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.container{
+    height: 100%;
+    max-width:1100px;
+    width:100%;
+    margin:0 auto;
+    margin-top: 10vh;
+}
+
+/* header */
+
+header{
+    height: 10vh;
+    width: 100%;
+    z-index:10;
+    position: fixed;
+    top:0;
+    left:0px;
+    right:0px;
+    text-align: center;
+    background-color:#77F9C3;
+    opacity:0.9;
+    box-sizing: border-box;
+}  
+
+header ul{
+    position:absolute;
+    width:100%;
+    line-height: 64px;
+    background-color:#77F9C3;
+    margin:0;
+}
+
+header li{
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: bolder;
+    margin-right: 2vh;
+    margin-left: 2vh;
+    background-color:#77F9C3;
+}
+
+header p{
+    margin-right: 10vh;
+    background-color:#77F9C3;
+}
+
+header a{
+    background-color:#77F9C3;
+
+}
+
+/* top */
+
+.top{
+    text-align: center;
+    z-index:2;
+}
+
+.top h1{
+    display: inline-block;
+    margin-top: 15vh;
+}
+
+.index{
+    font-size: larger;
+}
+
+.top_lists{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    text-align: center;
+}
+
+/* search */
+.search{
+    height:100%;
+}
+
+.search ul{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+}
+.search li{
+    background-color: aqua;
+    width: 50%;
+    padding:2vh;
+    margin: 10vh;
+    margin-top: 22vh;
+    border-radius: 30px;
+}
+
+.search a{
+    font-size: 2em;
+    display: block;
+    height:30vh;
+    background-color: aqua;
+}
+
+.search p{
+    margin-top: 5vh;
+    background-color: aqua;
+}
+
+.search i{
+    font-size: 2em;
+    background-color: aqua;
+}
+.top ul{
+  display: flex;
+}
+
+/* location */
+
+#mapid { 
+    height: 500px; 
+    width: 600px;
+    display: inline-block;
+}
+
+.location{
+    text-align: center;
+}
+
+.location p{
+    font-size: 1.5em;
+    margin-top: 1.5vh;
+}
+
+.location_text{
+    margin-top:15vh;
+    margin-bottom: 1.5vh;
+}
+
+/* area */
+.area{
+    text-align: center;
+    font-size: 1.7em;
+    height: 100%;
+}
+
+.area p{
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}
+
+.allarea{
+    margin-top: 60px;
+    display: block;
+    background-color: aqua;
+}
+
+.area ul{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.area li{
+    background-color: aqua;
+    width: 50%;
+    padding:2vh;
+    border-radius: 30px;
+    height:27vh;
+}
+
+.area select{
+    font-size: 1.0em;
+    padding: 1vh;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+.area input{
+    font-size: 0.8em;
+    padding: 1vh;
+    margin-top: 2vh;
+    border: 1px solid rgb(216, 218, 223);
+    border-radius: 15px;
+
+
+}
+
+.back{
+    margin-top: 3vh;
+    display: inline-block;
+}
+
+/* signup,login*/
+.sign,.login{
+    text-align: center;
+}
+
+.sign h2,.login h2{
+    margin-top: 16vh;
+    margin-bottom: 3vh;
+    font-size: 2em;
+}
+
+.sign p,.login p{
+    font-size: 1.7em;
+    margin-top:1vh;
+    margin-bottom: 1vh;
+}
+
+.sign input,.login input{
+    font-size: 1.5em;
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    padding:1.5vh;
+    width:40%;
+    border: 1px solid rgb(216, 218, 223);
+}
+
+.sign input[type="submit"],.login input[type="submit"],.contact input[type="submit"]{
+    margin-top: 2vh;
+    font-size: 1.5em;
+    margin-bottom: 1.5vh;
+    padding:1.5vh;
+    width:40%;
+    border: 1px solid rgb(216, 218, 223);
+}
+
+.sign a,.login a{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    display: inline-block;
+    font-size: 1.3em;
+}
+
+.panel{
+    background-color: #EEFFFF;
+    width:80%;
+    margin: auto;
+
+}
+
+/* contact */
+.contact{
+    text-align: center;
+
+}
+
+.contact p{
+    margin-top: 16vh;
+    margin-bottom: 5vh;
+    font-size: 2em;
+}
+
+.contact textarea{
+    font-size: 20px;
+    padding: 10px;
+    min-height: 200px;
+    border: 1px solid rgb(216, 218, 223);
+    resize: none;
+}
+
+.contact input{
+    margin-top: 3vh;
+    display: inline-block;
+    font-size: 1.3em;
+}
+
+/* list,top */
+.list{
+    text-align: center;
+}
+
+.list img, .top img{
+    width:250px;
+    height:200px;
+    display: inline-block;
+    
+}
+
+.lists{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    text-align: center;
+    margin-top: 15vh;
+}
+
+.lists_item{
+    margin:4vh;
+    border-radius: 30px;
+    background-color: #EEFFFF;
+    width: 40%;
+    padding-top:2vh;
+    padding-bottom: 2vh;
+    border: 3px solid rgb(216, 218, 223);
+
+}
+
+.lists_item a,.lists_item p{
+    background-color: #EEFFFF;
+    border-radius: 30px;
+}
+
+.lists_item a{
+    font-weight: bold;
+    font-size: larger;
+}
+
+.source{
+    font-size: smaller;
+}
+
+/* gim */
+.gim{
+    text-align: center;
+}
+
+table{
+    border: 2px solid rgb(216, 218, 223);
+    display: inline-block;
+    border-collapse: collapse;
+    width:70%;
+    margin:auto;
+    background-color: #EEFFFF;
+
+ 
+}
+
+td,caption{
+    border: 2px solid rgb(216, 218, 223);
+}
+
+#map { 
+    height: 300px; 
+    width: 400px;
+    display: inline-block;
+}
+
+.name{
+    margin-top: 15vh;
+}
+
+.introduce{
+    text-align: center;
+}
+
+.content{
+    width:80%;
+    text-align: left;
+    display: inline-block;
+}
+
+.gim img{
+    height:470px;
+    width:750px;
+}
+
+.newreview{
+    float: right;
+    display: block;
+    margin-right: 5vh;
+    background-color: #EEFFFF;
+    border-radius: 30px;
+    border: 3px solid rgb(216, 218, 223);
+
+}
+
+.gimreview{
+    text-align: center;
+    padding-left: 0%;
+    margin-bottom: 5vh;
+
+}
+
+.gimreview li{
+    width:75%;
+    margin:auto;
+    border: 2px solid rgb(216, 218, 223);
+    background-color: #EEFFFF;
+
+
+}
+
+.gim h3{
+    display: inline;
+    margin-left: 5vh;
+    float: left;
+}
+
+.create_day{
+    float:right;
+    margin-right: 5vh;
+    font-size: smaller;
+}
+
+.review_content{
+    margin-top:5vh;
+    text-align: left;
+    margin-left: 10vh;
+
 }

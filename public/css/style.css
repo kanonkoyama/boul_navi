@@ -3,11 +3,14 @@
     padding: 0;
     box-sizing: border-box;
     background-color: #FFFFFF;
+    overflow-wrap: break-all;
+    word-wrap: break-word;
 }
 
 html,body{
     width: 100%;
     min-height: 1vh;
+    height:100%;
 }
 
 p,h2,h3,li,a,select,input,table{
@@ -33,21 +36,20 @@ a{
 
 /* header */
 
-header{
+.main_header{
     height: 10vh;
     width: 100%;
     z-index:10;
     position: fixed;
     top:0;
-    left:0px;
-    right:0px;
+    left:0;
+    right:0;
     text-align: center;
     background-color:#77F9C3;
     opacity:0.9;
-    box-sizing: border-box;
 }  
 
-header ul{
+.main_header ul{
     position:absolute;
     width:100%;
     line-height: 64px;
@@ -55,7 +57,7 @@ header ul{
     margin:0;
 }
 
-header li{
+.main_header li{
     display: inline-block;
     text-transform: uppercase;
     font-size: 1.2em;
@@ -65,12 +67,20 @@ header li{
     background-color:#77F9C3;
 }
 
-header p{
-    margin-right: 10vh;
-    background-color:#77F9C3;
+.title a{
+    font-size: 2.3em;
+    font-family: 'Cherry Bomb One', cursive;
+    line-height: 10vh;
 }
 
-header a{
+
+.main_header p{
+    margin-right: 10vh;
+    background-color:#77F9C3;
+    font-size: smaller;
+}
+
+.main_header a{
     background-color:#77F9C3;
 
 }
@@ -165,16 +175,15 @@ header a{
 .area{
     text-align: center;
     font-size: 1.7em;
-    height: 100%;
 }
 
 .area p{
     margin-top: 15vh;
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
 }
 
 .allarea{
-    margin-top: 60px;
+    margin-top: 10vh;
     display: block;
     background-color: aqua;
 }
@@ -192,13 +201,13 @@ header a{
     width: 50%;
     padding:2vh;
     border-radius: 30px;
-    height:27vh;
+    height:25vh;
 }
 
 .area select{
     font-size: 1.0em;
     padding: 1vh;
-    margin-top: 20px;
+    margin-top: 5vh;
     border-radius: 15px;
 }
 
@@ -208,12 +217,9 @@ header a{
     margin-top: 2vh;
     border: 1px solid rgb(216, 218, 223);
     border-radius: 15px;
-
-
 }
-
 .back{
-    margin-top: 3vh;
+    margin-top: 0.8vh;
     display: inline-block;
 }
 
@@ -223,19 +229,21 @@ header a{
 }
 
 .sign h2,.login h2{
-    margin-top: 16vh;
+    margin-top: 1vh;
     margin-bottom: 3vh;
     font-size: 2em;
+    padding-top: 2vh;
+
 }
 
 .sign p,.login p{
-    font-size: 1.7em;
+    font-size: 1.5em;
     margin-top:1vh;
     margin-bottom: 1vh;
 }
 
 .sign input,.login input{
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-top: 1.5vh;
     margin-bottom: 1.5vh;
     padding:1.5vh;
@@ -263,22 +271,22 @@ header a{
     background-color: #EEFFFF;
     width:80%;
     margin: auto;
-
 }
 
-/* contact */
-.contact{
+/* contact,review */
+.contact,.review{
     text-align: center;
 
 }
 
-.contact p{
+.contact p,.review p{
     margin-top: 16vh;
     margin-bottom: 5vh;
     font-size: 2em;
+    padding-top: 2vh;
 }
 
-.contact textarea{
+.contact textarea,.review textarea{
     font-size: 20px;
     padding: 10px;
     min-height: 200px;
@@ -286,10 +294,11 @@ header a{
     resize: none;
 }
 
-.contact input{
+.contact input,.review input{
     margin-top: 3vh;
     display: inline-block;
     font-size: 1.3em;
+    margin-bottom: 2vh;
 }
 
 /* list,top */
@@ -346,21 +355,31 @@ table{
     border: 2px solid rgb(216, 218, 223);
     display: inline-block;
     border-collapse: collapse;
-    width:70%;
     margin:auto;
     background-color: #EEFFFF;
+    margin-bottom: 5vh;
+    table-layout: fixed;
+    width:100vh;
+}
 
- 
+tbody{
+    margin:auto;
+    table-layout: fixed;
 }
 
 td,caption{
     border: 2px solid rgb(216, 218, 223);
 }
 
+td:nth-child(2){
+    width:80%;
+}
+
 #map { 
     height: 300px; 
     width: 400px;
     display: inline-block;
+    z-index:8;
 }
 
 .name{
@@ -404,8 +423,20 @@ td,caption{
     margin:auto;
     border: 2px solid rgb(216, 218, 223);
     background-color: #EEFFFF;
+}
 
+.gimreview input{
+    font-size: 0.7em;
+    margin-right: 4vh;
+    margin-top:1.5vh;
+    margin-bottom: 1.5vh;
+    width:10%;
+    border: 1px solid rgb(216, 218, 223);
+    
+}
 
+.gimreview form{
+    text-align: right;
 }
 
 .gim h3{
@@ -424,5 +455,4 @@ td,caption{
     margin-top:5vh;
     text-align: left;
     margin-left: 10vh;
-
 }

@@ -1,0 +1,723 @@
+@media all and (min-width:490px){
+    .left_header,.right_header{
+        display: none;
+    }
+}
+
+@media all and (min-width:1155px){
+    .container{
+        margin-top: 1vh;
+    }
+
+    /* header */
+    header{
+        height:140px;
+    }
+    header ul{
+        max-width:2100px;
+        width:100%;
+    }
+    header li{
+        font-size: 3em;
+    }
+    .main_header li{
+        margin-left: 0.5vh;
+        margin-left: 0.5vh;
+    }
+
+    /* top */
+    .top h1{
+        margin-top: 5vh;
+    }
+
+    /* search */
+    .search li{
+        margin-top: 18vh;
+    }
+
+    /* location */
+    .location_text{
+        margin-top: 5vh;
+    }
+
+    /* area */
+    .area p{
+        margin-top: 1vh;
+    }
+
+    /* signup,login */
+    .sign h2,.login h2{
+        margin-top: 1vh;
+        
+    }
+
+    /* contact,review */
+    .contact p,.review p{
+        margin-top: 5vh;
+    }
+
+    /* list,top */
+    .lists{
+        margin-top: 5vh;
+    }
+
+    /* gim */
+    .name{
+        margin-top: 4vh;
+    }
+
+    .gim h2{
+        font-size: 1.8em;
+    }
+
+    .content{
+        font-size: larger;
+    }
+
+    .gim h3{
+        font-size: larger;
+    }
+
+    .review_content{
+        font-size: larger;
+    }
+
+    .create_day{
+        font-size: 1em;
+    }
+
+    .gimreview input{
+        font-size: 1em;
+    }
+
+}
+
+@media all and (max-width:1154px){
+    /* signup,login */
+    .panel{
+        margin-top:20vh;
+    }
+}
+
+@media all and (max-width:1120px){
+    /* header */
+    .main_header p{
+        margin-right: 1vh;
+    }
+
+    .main_header ul{
+        padding-left: 0;
+    }
+
+    .main_header li{
+        font-size: 1em;
+        margin-left: 1vh;
+        margin-right: 1vh;
+    }
+
+
+}
+
+@media all and (max-width:952px){
+    /* header */
+    .main_header li{
+        font-size: 1em;
+        margin-left: 1vh;
+        margin-right: 1vh;
+
+    }
+
+    .main_header ul{
+        padding-left: 0;
+        
+    }
+
+    .main_header p{
+        margin-bottom: 1vh;
+        margin-top: 1vh;
+        
+    }
+
+
+    /* top */
+    .top h1{
+        font-size: 1.3em;
+        margin-top: 14vh;
+    }
+
+    .index{
+        font-size: smaller;
+    }
+
+    /* search */
+    .search p{
+        font-size: smaller;
+    }
+
+    /* location */
+    #mapid { 
+        height: 400px; 
+        display: inline-block;
+        width:90%;
+    }
+    
+    .location p{
+        font-size: smaller;
+        width:80%;
+        margin:auto;
+    }
+
+    .location_text{
+        margin-top: 25vh;
+    }
+
+    /* area */
+    .area p{
+        margin-top: 25vh;
+    }
+
+    .allarea{
+        margin-top: 8vh;
+        margin-bottom: 5vh;
+        font-size: 0.8em;
+
+
+    }
+
+    .area ul{
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+    }
+
+    .area li{
+        height:22vh;
+    }
+
+    .area select{
+        font-size: 0.6em;
+        margin-top: 5vh;
+
+    }
+
+    .area input{
+        font-size: 0.5em;
+
+    }
+
+    .back{
+        margin-top:0.5vh;
+        font-size: smaller;
+    }
+
+
+    /* signup,login*/
+    .sign h2,.login h2{
+        font-size: 1.2em;
+    }
+
+    .sign p,.login p{
+        font-size: 1em;
+    }
+
+    .sign input,.login input{
+        font-size: 1em;
+        width:70%;
+    }
+
+    .sign input[type="submit"],.login input[type="submit"],.contact input[type="submit"],.review input[type="submit"]{
+        font-size: 0.8em;
+    }
+
+    .sign a,.login a{
+        font-size: 1em;
+    }
+
+    .panel{
+        margin-top:25vh;
+    }
+
+    /* contact,review */
+    .contact p,.review p{
+        font-size: 1.2em;
+        padding: 1vh;
+
+    }
+
+    .contact textarea,.review textarea{
+        font-size: 1.3em;
+    }
+
+    /* list,top */
+    .source{
+        overflow-wrap: break-all;
+        word-wrap: break-word;
+        min-width: 0;
+    }
+
+    .lists{
+        margin-top: 20vh;
+    }
+
+    .list img,.top img{
+        width: 100%;
+    }
+
+    /* gim */
+    table{
+        display: table;
+        width:90%;
+        margin-left:auto;
+        margin-right: auto;
+        text-align: left;
+        table-layout: fixed;
+        word-wrap: break-word;
+        border-spacing:0;
+        margin-bottom: 20vh;
+    }
+    tbody{
+        margin:auto;
+        table-layout: fixed;
+    }
+
+    caption{
+        margin:auto;
+        text-align: center;
+        background-color: #EEFFFF;
+
+    }
+
+    td{
+        font-size: smaller;
+    }
+
+    td:nth-child(2){
+        width:80%;
+    }
+
+    #map{
+        width:100%;
+        height:210px;
+        padding:0;
+        z-index:8;
+    }
+
+
+
+    .name{
+        margin-top: 25vh;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .gim img{
+        height:200px;
+        width:90%;
+        margin:0 auto;
+        display: inline-block;
+    }
+
+    .gim_source{
+        font-size: 0.05em;
+    }
+
+    .gim h2{
+        font-size: 1.3em;
+    }
+
+    .content{
+        margin-top:0;
+        margin-bottom: 2vh;
+    }
+
+    .gim h3{
+        margin-left: 1vh;
+        margin-top: 1vh;
+        font-size: smaller;
+    }
+    
+    .gimreview input{
+        font-size: 0.3em;
+        margin-right: 2vh;
+        margin-top:1vh;
+        margin-bottom: 1vh;
+        width:15%;
+    }
+    
+    .review_content{
+        font-size: smaller;
+        margin: 2vh;
+    }
+    .create_day{
+        font-size: 0.05em;
+        margin:1vh;
+    }
+}
+
+@media all and (max-width:729px){
+    /* header */
+    .main_header{
+        display: none;
+    }
+    .responsive_header{
+        background-color:#77F9C3;
+        opacity:0.9;
+        display: flex;
+        height: 15vh;
+        width: 100%;
+        z-index:10;
+        position: fixed;
+        top:0;
+        left:0;
+        right:0;
+    }
+
+    .left_header{
+        display: inline-block;
+        width:40%;
+
+
+    }
+
+    .responsive_title{
+        font-size: 2em;
+        font-family: 'Cherry Bomb One', cursive;
+        line-height: 5vh;
+        position: absolute;
+        left: 5px;
+        top:5px;
+
+    
+    }
+
+    .responsive_header p{
+        font-size: 0.01em;
+        position: absolute;
+        left: 5px;
+        top:40px;
+        width:30%;
+
+    }
+
+    .right_header{
+        display: inline-block;
+        width:60%;
+
+
+    }
+
+    .right_header ul{
+        display: flex;
+        position: relative;
+        right:18%;
+
+    }
+
+    .right_header li{
+        flex-grow: 1;
+        margin: 10px;
+        font-size: 1.7em;
+
+    }
+}    
+
+@media all and (max-width:607px){
+    .container{
+        width:100vw;
+    }
+    /* header */
+    .right_header li{
+        font-size: 1.4em;
+    }
+
+
+
+
+    /* top */
+    .top h1{
+        font-size: 1.3em;
+        margin-top: 10vh;
+    }
+
+    .index{
+        font-size: smaller;
+    }
+
+    /* search */
+    .search a{
+        font-size: 1em;
+        height: fit-content;
+    }
+
+    .search p{
+        margin:0;
+    }
+
+    .search ul{
+        height:10vh;
+        width: 100%;
+        margin-left: 0 auto;
+        margin-right: 0 auto;
+
+    }
+
+    .search li{
+        margin-left:1vh;
+        margin-right: 1vh;
+        
+        position: relative;
+        right:10%;
+        top:30vh;
+        width:40%;
+    }
+
+    /* location */
+    #mapid { 
+        height: 400px; 
+        display: inline-block;
+        width:90%;
+    }
+    
+    .location p{
+        font-size: smaller;
+        width:80%;
+        margin:auto;
+    }
+
+    .location_text{
+        margin-top: 18vh;
+    }
+
+    /* area */
+
+
+    .area p{
+        font-size: smaller;
+        margin-top: 17vh;
+    }
+
+    .allarea{
+        margin-top: 8vh;
+        margin-bottom: 5vh;
+        font-size: 0.8em;
+
+
+    }
+
+    .area ul{
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+    }
+
+    .area li{
+        height:23vh;
+        width:80%;
+        position: relative;
+        left:-10%;
+        min-width:0.7em;
+    }
+
+    .area select{
+        font-size: 0.6em;
+        margin-top: 5vh;
+
+    }
+
+    .area input{
+        font-size: 0.5em;
+
+    }
+
+    .back{
+        margin-top:0.5vh;
+        font-size: smaller;
+    }
+
+    /* signup,login*/
+    .sign h2,.login h2{
+        font-size: 1.2em;
+    }
+
+    .sign p,.login p{
+        font-size: 1em;
+    }
+
+    .sign input,.login input{
+        font-size: 0.5em;
+        width:70%;
+    }
+
+    .sign input[type="submit"],.login input[type="submit"],.contact input[type="submit"],.review input[type="submit"]{
+        font-size: 0.8em;
+
+    }
+
+    .sign a,.login a{
+        font-size: 1em;
+    }
+
+    .panel{
+        margin-top:23vh;
+    }
+
+    /* contact,review */
+    .contact p,.review p{
+        font-size: 1.2em;
+        padding: 1vh;
+    }
+
+    .contact textarea,.review textarea{
+        font-size: 1em;
+    }
+
+    /* list,top */
+    .list img, .top img{
+        width:100%;
+        height:20vh;
+
+
+    }
+    .gim_img{
+        padding: 0;
+        text-align: left;
+        position: relative;
+
+
+    }
+
+    .list ul,.top ul{
+        padding:0;
+        width:100%;
+    }
+
+    .lists_item{
+        margin-top:1vh;
+        margin-bottom: 1vh;
+        width:40%;
+
+
+
+    }
+
+    .lists_item a{
+        font-size: 0.4em;
+        height:1vh;
+    }
+
+    .source{
+        transform: scale(0.5);
+
+        margin:0 auto;
+        width:175%;
+        min-width: 0;
+        position: absolute;
+        left:-7vh;
+        bottom:0;
+        word-wrap: break-word;
+        background-color: transparent;
+    }
+
+    .lists_item p{
+        min-width: 0;
+        background-color: transparent;
+
+    }
+
+    .address{
+        font-size: 0.01em;
+        margin-top: 2vh;
+    }
+
+    /* gim */
+    table{
+        display: table;
+        width:90%;
+        margin-left:auto;
+        margin-right: auto;
+        text-align: left;
+        table-layout: fixed;
+        word-wrap: break-word;
+        border-spacing:0;
+        margin-bottom: 5vh;
+    }
+
+
+    tbody{
+        margin:auto;
+        table-layout: fixed;
+    }
+
+    caption{
+        margin:auto;
+        text-align: center;
+        background-color: #EEFFFF;
+
+    }
+
+    td{
+        font-size: smaller;
+    }
+
+    td:nth-child(2){
+        width:80%;
+    }
+
+    #map{
+        width:100%;
+        height:210px;
+        padding:0;
+        z-index:8;
+    }
+
+
+
+    .name{
+        margin-top: 20vh;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .gim img{
+        height:200px;
+        width:90%;
+        margin:0 auto;
+        display: inline-block;
+    }
+
+    .gim_source{
+        font-size: 0.05em;
+    }
+
+    .gim h2{
+        font-size: 1.3em;
+    }
+
+    .content{
+        margin-top:0;
+        margin-bottom: 2vh;
+    }
+
+    .gim h3{
+        margin-left: 1vh;
+        margin-top: 1vh;
+        font-size: smaller;
+    }
+    
+    .gimreview input{
+        font-size: 0.3em;
+        margin-right: 2vh;
+        margin-top:1vh;
+        margin-bottom: 1vh;
+        width:15%;
+    }
+    
+    .review_content{
+        font-size: smaller;
+        margin: 2vh;
+    }
+    .create_day{
+        font-size: 0.05em;
+        margin:1vh;
+    }
+}

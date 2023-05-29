@@ -2,13 +2,15 @@ const express = require('express');
 const mysql = require('mysql');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const methodOverride = require('method-override'); 
 
 
 
 const app = express();
 
 app.use(express.static('public'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 const connection = mysql.createConnection({
   host: '127.0.0.1',
@@ -44,6 +46,7 @@ app.use((req,res,next) => {
   }else{
     console.log("ログインしています");
     res.locals.name = req.session.name;
+    res.locals.id = req.session.userId;
     res.locals.isLoggedIn = true;
   }
   next();
@@ -93,7 +96,7 @@ app.get("/list",(req,res) => {
 app.get("/gim/:id",(req,res) => {
   const id = req.params.id;
   connection.query(
-    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id WHERE gims.id = ?;SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.gim_id = ?",
+    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id WHERE gims.id = ?;SELECT reviews.id,user_id,content,name,create_day FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.gim_id = ?",
     [id,id],
     (error,results) => {
       console.log(error);
@@ -119,16 +122,24 @@ app.get("/gim/:id",(req,res) => {
         };
         return gim;
       });
-      var reviews = results[1].map((result) => {
+      const review_text = [];
+      if(results[1].length === 0){
+        review_text.push("まだこのジムの口コミはありません");
+        console.log(review_text);
+        console.log("hello");
+      }
+      var reviews = results[1].map((result1) => {
+        console.log(result1);
         var review = {
-          "user-id": result.user_id,
-          "content": nl2br(result.content),
-          "name": result.name,
-          "create_day": result.create_day
+          "id": result1.id,
+          "user_id": result1.user_id,
+          "content": nl2br(result1.content),
+          "name": result1.name,
+          "create_day": result1.create_day
         }
         return review;
       });
-      res.render("gim.ejs", {gim_latlng: gim_latlng[0],gim_informations: gim_informations[0],reviews: reviews});
+      res.render("gim.ejs", {gim_latlng: gim_latlng[0],gim_informations: gim_informations[0],reviews: reviews,review_text: review_text});
     }
   );
 });
@@ -182,11 +193,15 @@ app.post("/create/:id",(req,res,next) => {
   );
 });
 
-app.post("/delete/:id", (req,res) => {
+app.delete("/delete/:id", (req,res) => {
+  console.log("accept delete request");
+  console.log(req.params.id);
   connection.query(
     "DELETE FROM reviews WHERE id = ?",
     [req.params.id],
     (error,results) => {
+      console.log("accept delete request");
+      console.log(results);
       console.log(error);
       res.redirect("/list");
     }
@@ -281,7 +296,19 @@ app.get("/test",(req,res) => {
 });
 
 
-app.get("/test2",(req,res) => {
+app.get("/test2/:id",(req,res) => {
+  const id = req.params.id;
+    connection.query(
+    "SELECT reviews.id,user_id,gim_id,name FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.gim_id = ?;SELECT * FROM reviews",
+    [id],
+    (error,results) => {
+      console.log("hello");
+      console.log(results[0]);
+      console.log(results[1]);
+      console.log(error);
+    }
+  )
+
   res.render("test2.ejs");
  });
 

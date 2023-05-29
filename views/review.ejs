@@ -4,29 +4,38 @@
     <meta charset="utf-8">
     <title>boul_navi</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <script src="/send_url.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v6.1.2/css/all.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
   </head>
   <body>
     <%- include('partials/header'); %>
-    <div class="main_wrapper">
-      <div class="container">
-        <form action="/create/<%= gim.id %>" method="post">
-          <% if(errors.length > 0){ %>
-            <ul class="errors">
-              <% errors.forEach(error => { %>
-              <li><%= error %></li>
-              <% }); %>
-            </ul>
-          <% } %>  
-          <p>口コミを投稿する</p>
-          <textarea name="content" maxlength="500" style="width:70%; height:100px"></textarea>
-          <br>
-          <input type="submit" value="投稿する">
-        </form>
+    <div class="review">
+      <div class="main_wrapper">
+        <div class="container">
+          <div class="panel">
+          <form action="/create/<%= gim.id %>" method="post">
+            <% if(errors.length > 0){ %>
+              <ul class="errors">
+                <% errors.forEach(error => { %>
+                <li><%= error %></li>
+                <% }); %>
+              </ul>
+            <% } %>  
+            <p>口コミを投稿する</p>
+            <textarea name="content" maxlength="500" style="width:70%; height:100px"></textarea>
+            <br>
+            <input type="submit" value="投稿する">
+          </form>
+          </div>
+        </div>
       </div>
+      <footer>
+      </footer>
     </div>
-    <footer>
-    </footer>
   </body>
 </html>

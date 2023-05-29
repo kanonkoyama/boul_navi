@@ -1,16 +1,36 @@
 <header>
-    <div class="header-nav">
-      <ul class="a">
-      <li><a href="/">ボルナビ</a></li>
+    <div class="main_header">
+      <ul>
+      <li class="title"><a href="/">ボルナビ</a></li>
       <li><p>ボルダリング歴１年の管理者による、ボルダリングジム比較サイト</p></li>
-        <li><a href="/search">探す</a></li>
+        <li class="button"><a href="/search">探す</a></li>
         <% if (locals.isLoggedIn) { %>
-          <li><a href="/logout">ログアウト</a></li>
+          <li class="button"><a href="/logout">ログアウト</a></li>
         <% } else { %>
-          <li><a href="/signup">新規登録</a></li>
-          <li><a href="/login">ログイン</a></li>
+          <li class="button"><a href="/signup">新規登録</a></li>
+          <li class="button"><a href="/login">ログイン</a></li>
         <% } %>
         <li><a href="/contact">ご意見箱</a></li>
       </ul>
+    </div>
+    <div class="responsive_header">
+      <div class="left_header">
+        <ul>
+        <li class="responsive_title"><a href="/">ボルナビ</a></li>
+        <li><p>中級クライマーによる、ボルダリングジム比較サイト</p></li>
+        </ul>
+      </div>
+      <div class="right_header">
+        <ul>
+          <li><a href="/search"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+          <% if (locals.isLoggedIn) { %>
+            <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+          <% } else { %>
+            <li><a href="/signup"><i class="fa-solid fa-user-plus"></i></a></li>
+            <li><a href="/login"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+          <% } %>
+          <li><a href="/contact"><i class="fa-solid fa-envelope"></i></a></li>
+        </ul>
+      </div>  
     </div>
 </header>

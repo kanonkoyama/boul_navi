@@ -41,11 +41,9 @@ app.use(
 app.use((req,res,next) => {
   if(req.session.userId === undefined){
     console.log("ログインしていません");
-    res.locals.name = "ゲスト"
     res.locals.isLoggedIn = false;
   }else{
     console.log("ログインしています");
-    res.locals.name = req.session.name;
     res.locals.id = req.session.userId;
     res.locals.isLoggedIn = true;
   }
@@ -56,9 +54,9 @@ app.get('/', (req, res) => {
   connection.query(
     "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id",
     (error,results) => {
-      const errors = []
+      const errors = [];
       console.log(error);
-      res.render("top.ejs", {gims: results, errors: []});
+      res.render("top.ejs", {gims: results, errors: errors});
     }
   );
 });
@@ -125,8 +123,6 @@ app.get("/gim/:id",(req,res) => {
       const review_text = [];
       if(results[1].length === 0){
         review_text.push("まだこのジムの口コミはありません");
-        console.log(review_text);
-        console.log("hello");
       }
       var reviews = results[1].map((result1) => {
         console.log(result1);
@@ -194,13 +190,10 @@ app.post("/create/:id",(req,res,next) => {
 });
 
 app.delete("/delete/:id", (req,res) => {
-  console.log("accept delete request");
-  console.log(req.params.id);
   connection.query(
     "DELETE FROM reviews WHERE id = ?",
     [req.params.id],
     (error,results) => {
-      console.log("accept delete request");
       console.log(results);
       console.log(error);
       res.redirect("/list");
@@ -259,7 +252,14 @@ app.get("/contact/index",(req,res) => {
   if(req.session.userId !== 1){
     const errors = [];
     errors.push("権限がありません");
-    res.render("top.ejs", {errors: errors});
+    connection.query(
+      "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id",
+      (error,results) => {
+        const errors = [];
+        console.log(error);
+        res.render("top.ejs", {gims: results, errors: errors});
+      }
+    );
   }else{
     connection.query(
     "SELECT * FROM contacts LEFT JOIN users ON contacts.user_id = users.id",
@@ -269,49 +269,13 @@ app.get("/contact/index",(req,res) => {
           "user_name": result.name,
           "content": nl2br(result.content) 
         };
-        console.log(contacts);
         return contacts;
-      });
-      console.log(user_contacts);
-      user_contacts.forEach((contact) => {
-        console.log(contact);
-        console.log(contact.user_name);
-        console.log(contact.content);
       });
       console.log(error);
       res.render("contact.index.ejs", {user_contacts: user_contacts});
     });   
     }
   });
-
-app.get("/test",(req,res) => {
-  connection.query(
-    "SELECT * FROM gims LEFT JOIN informations ON gims.id = informations.gim_id",
-    (error,results) => {
-      const errors = []
-      console.log(error);
-      res.render("list.ejs", {gims: results, errors: []});
-    }
-  );
-});
-
-
-app.get("/test2/:id",(req,res) => {
-  const id = req.params.id;
-    connection.query(
-    "SELECT reviews.id,user_id,gim_id,name FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.gim_id = ?;SELECT * FROM reviews",
-    [id],
-    (error,results) => {
-      console.log("hello");
-      console.log(results[0]);
-      console.log(results[1]);
-      console.log(error);
-    }
-  )
-
-  res.render("test2.ejs");
- });
-
  
 app.get("/signup",(req,res) => {
   res.render("signup.ejs", {errors: []});

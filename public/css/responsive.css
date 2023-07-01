@@ -1,5 +1,5 @@
-@media all and (min-width:490px){
-    .left_header,.right_header{
+@media all and (min-width:840px){
+    .responsive_header{
         display: none;
     }
 }
@@ -13,13 +13,16 @@
     header{
         height:140px;
     }
+
     header ul{
         max-width:2100px;
         width:100%;
     }
+
     header li{
         font-size: 3em;
     }
+    
     .main_header li{
         margin-left: 0.5vh;
         margin-left: 0.5vh;
@@ -74,11 +77,11 @@
         font-size: larger;
     }
 
-    .gim h3{
+    .gim h3,.contact_list h3{
         font-size: larger;
     }
 
-    .review_content{
+    .review_content,.contact_list p{
         font-size: larger;
     }
 
@@ -114,8 +117,6 @@
         margin-left: 1vh;
         margin-right: 1vh;
     }
-
-
 }
 
 @media all and (max-width:952px){
@@ -124,18 +125,15 @@
         font-size: 1em;
         margin-left: 1vh;
         margin-right: 1vh;
-
     }
 
     .main_header ul{
         padding-left: 0;
-        
     }
 
     .main_header p{
         margin-bottom: 1vh;
         margin-top: 1vh;
-        
     }
 
 
@@ -180,8 +178,6 @@
         margin-top: 8vh;
         margin-bottom: 5vh;
         font-size: 0.8em;
-
-
     }
 
     .area ul{
@@ -201,7 +197,6 @@
 
     .area input{
         font-size: 0.5em;
-
     }
 
     .back{
@@ -240,7 +235,6 @@
     .contact p,.review p{
         font-size: 1.2em;
         padding: 1vh;
-
     }
 
     .contact textarea,.review textarea{
@@ -274,6 +268,7 @@
         border-spacing:0;
         margin-bottom: 20vh;
     }
+
     tbody{
         margin:auto;
         table-layout: fixed;
@@ -283,7 +278,6 @@
         margin:auto;
         text-align: center;
         background-color: #EEFFFF;
-
     }
 
     td{
@@ -300,8 +294,6 @@
         padding:0;
         z-index:8;
     }
-
-
 
     .name{
         margin-top: 25vh;
@@ -330,7 +322,7 @@
         margin-bottom: 2vh;
     }
 
-    .gim h3{
+    .gim h3,.contact_list h3{
         margin-left: 1vh;
         margin-top: 1vh;
         font-size: smaller;
@@ -344,21 +336,23 @@
         width:15%;
     }
     
-    .review_content{
+    .review_content,.contact_list p{
         font-size: smaller;
         margin: 2vh;
     }
+
     .create_day{
         font-size: 0.05em;
         margin:1vh;
     }
 }
 
-@media all and (max-width:729px){
+@media all and (max-width:839px){
     /* header */
     .main_header{
         display: none;
     }
+
     .responsive_header{
         background-color:#77F9C3;
         opacity:0.9;
@@ -375,8 +369,6 @@
     .left_header{
         display: inline-block;
         width:40%;
-
-
     }
 
     .responsive_title{
@@ -386,8 +378,6 @@
         position: absolute;
         left: 5px;
         top:5px;
-
-    
     }
 
     .responsive_header p{
@@ -396,28 +386,23 @@
         left: 5px;
         top:40px;
         width:30%;
-
     }
 
     .right_header{
         display: inline-block;
         width:60%;
-
-
     }
 
     .right_header ul{
         display: flex;
         position: relative;
         right:18%;
-
     }
 
     .right_header li{
         flex-grow: 1;
         margin: 10px;
         font-size: 1.7em;
-
     }
 }    
 
@@ -425,13 +410,11 @@
     .container{
         width:100vw;
     }
+
     /* header */
     .right_header li{
         font-size: 1.4em;
     }
-
-
-
 
     /* top */
     .top h1{
@@ -458,7 +441,6 @@
         width: 100%;
         margin-left: 0 auto;
         margin-right: 0 auto;
-
     }
 
     .search li{
@@ -489,8 +471,6 @@
     }
 
     /* area */
-
-
     .area p{
         font-size: smaller;
         margin-top: 17vh;
@@ -500,8 +480,6 @@
         margin-top: 8vh;
         margin-bottom: 5vh;
         font-size: 0.8em;
-
-
     }
 
     .area ul{
@@ -525,7 +503,6 @@
 
     .area input{
         font-size: 0.5em;
-
     }
 
     .back{
@@ -574,15 +551,12 @@
     .list img, .top img{
         width:100%;
         height:20vh;
-
-
     }
+
     .gim_img{
         padding: 0;
         text-align: left;
         position: relative;
-
-
     }
 
     .list ul,.top ul{
@@ -594,9 +568,6 @@
         margin-top:1vh;
         margin-bottom: 1vh;
         width:40%;
-
-
-
     }
 
     .lists_item a{
@@ -606,7 +577,6 @@
 
     .source{
         transform: scale(0.5);
-
         margin:0 auto;
         width:175%;
         min-width: 0;
@@ -620,7 +590,6 @@
     .lists_item p{
         min-width: 0;
         background-color: transparent;
-
     }
 
     .address{
@@ -641,7 +610,6 @@
         margin-bottom: 5vh;
     }
 
-
     tbody{
         margin:auto;
         table-layout: fixed;
@@ -651,7 +619,6 @@
         margin:auto;
         text-align: center;
         background-color: #EEFFFF;
-
     }
 
     td{
@@ -668,8 +635,6 @@
         padding:0;
         z-index:8;
     }
-
-
 
     .name{
         margin-top: 20vh;
@@ -698,7 +663,7 @@
         margin-bottom: 2vh;
     }
 
-    .gim h3{
+    .gim h3,.contact_list h3{
         margin-left: 1vh;
         margin-top: 1vh;
         font-size: smaller;
@@ -712,10 +677,11 @@
         width:15%;
     }
     
-    .review_content{
+    .review_content,.contact_list p{
         font-size: smaller;
         margin: 2vh;
     }
+
     .create_day{
         font-size: 0.05em;
         margin:1vh;

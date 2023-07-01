@@ -276,7 +276,6 @@ a{
 /* contact,review */
 .contact,.review{
     text-align: center;
-
 }
 
 .contact p,.review p{
@@ -375,7 +374,7 @@ td:nth-child(2){
     width:80%;
 }
 
-#map { 
+#map{ 
     height: 300px; 
     width: 400px;
     display: inline-block;
@@ -408,17 +407,15 @@ td:nth-child(2){
     background-color: #EEFFFF;
     border-radius: 30px;
     border: 3px solid rgb(216, 218, 223);
-
 }
 
-.gimreview{
+.gimreview,.contact_list{
     text-align: center;
     padding-left: 0%;
     margin-bottom: 5vh;
-
 }
 
-.gimreview li{
+.gimreview li,.contact_list li{
     width:75%;
     margin:auto;
     border: 2px solid rgb(216, 218, 223);
@@ -432,14 +429,13 @@ td:nth-child(2){
     margin-bottom: 1.5vh;
     width:10%;
     border: 1px solid rgb(216, 218, 223);
-    
 }
 
 .gimreview form{
     text-align: right;
 }
 
-.gim h3{
+.gim h3,.contact_list h3{
     display: inline;
     margin-left: 5vh;
     float: left;
@@ -451,7 +447,7 @@ td:nth-child(2){
     font-size: smaller;
 }
 
-.review_content{
+.review_content,.contact_list p{
     margin-top:5vh;
     text-align: left;
     margin-left: 10vh;

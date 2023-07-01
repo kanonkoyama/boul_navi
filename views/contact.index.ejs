@@ -16,13 +16,16 @@
     <%- include('partials/header'); %>
     <div class="main_wrapper">
       <div class="container">
-        <ul class="contact">
+        <ul class="contact_list">
           <% user_contacts.forEach((contact) => { %>
-            <li><%=contact%></li>
-            <li><%= contact.user_name %></li>
-            <li><%- contact.content %></li>
+            <li>
+              <h3><%= contact.user_name %></h3>
+              <br>
+              <br>
+              <p><%- contact.content %></p>
+            </li>
           <% }); %>
-            </ul>
+        </ul>
       </div>
     </div>
     <footer>

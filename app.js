@@ -170,7 +170,14 @@ app.post("/create/:id",(req,res,next) => {
     errors.push("内容を入力してください");
   };
   if(errors.length > 0){
-    res.render("review.ejs", {errors: errors});  
+    const id = req.params.id;
+    connection.query(
+      "SELECT * FROM gims WHERE id = ?",
+      [id],
+      (error,results) => {
+        console.log(error);
+        res.render("review.ejs", {gim: results[0],errors: errors}); 
+      });   
   }else{
     next();
   }

@@ -40,10 +40,8 @@ app.use(
 
 app.use((req,res,next) => {
   if(req.session.userId === undefined){
-    console.log("ログインしていません");
     res.locals.isLoggedIn = false;
   }else{
-    console.log("ログインしています");
     res.locals.id = req.session.userId;
     res.locals.isLoggedIn = true;
   }

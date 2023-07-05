@@ -3,8 +3,7 @@ const mysql = require('mysql');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override'); 
-
-
+require('dotenv').config();
 
 const app = express();
 
@@ -15,7 +14,7 @@ app.use(methodOverride('_method'));
 const connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: '1227Kumakuma',
+  password: process.env.DBpassword,
   database: 'boul_navi',
   multipleStatements: true,
   dateStrings: 'date'

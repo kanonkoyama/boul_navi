@@ -1,6 +1,6 @@
 ## Name
 
-# boul_navi
+boul_navi
 
 Bouldering gym review site
 

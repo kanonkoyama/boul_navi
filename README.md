@@ -1,6 +1,6 @@
 ## Name
 
-boul_navi
+## boul_navi
 
 Bouldering gym review site
 
@@ -16,8 +16,6 @@ Bouldering gym review site
 There are sites that introduce bouldering gym experience plans, etc., but there are not many bouldering gym sites that mainly rely on word of mouth. I thought it would be interesting if I actually went there and introduced it, so I created it.
 
 ## Requirement
-
-"hoge"を動かすのに必要なライブラリなどを列挙する
 
 * Express 4.18.2
 * node.js 16.18.0

@@ -1,4 +1,4 @@
-## Name（リポジトリ/プロジェクト/OSSなどの名前）
+## Name
 
 boul_navi
 
